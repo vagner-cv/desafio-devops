@@ -92,7 +92,25 @@ jobs:
       push: true
       tags: registry.heroku.com/hellodocker-vagner/web:latest
 
-  
+  # ****** ETAPA Publica ambiente Desenvolvimento ******
+ deploy:
+  name: Publica ambiente Desenvolvimento
+  needs: push-image
+  runs-on: ubuntu-latest
+    
+  steps:
+  - name: Login no Heroku
+    uses: docker/login-action@v2
+    with:
+      registry: registry.heroku.com
+      username: ${{ secrets.HEROKU_EMAIL }}
+      password: ${{ secrets.HEROKU_API_KEY }}
+  - name: Publicação
+    run: heroku container:release -a hellodocker-vagner web 
+    env:
+      HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
   
   
     
