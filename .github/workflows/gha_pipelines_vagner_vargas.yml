@@ -50,7 +50,7 @@ jobs:
  # ****** ETAPA Testes Automatizados ******
  sec-tests:
   name: Testes Automatizados
-  needs: build
+  needs: code-quality
   runs-on: ubuntu-latest
     
   steps:
